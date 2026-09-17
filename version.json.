@@ -1,6 +1,6 @@
-{
-  "verAddr": "https://githubusercontent.com",
+ "verAddr": "https://githubusercontent.com",
   "resetGuest": true,
   "ForceUpdate": false,
-  "NewVersion": "1.100.0"
+  "NewVersion": "1.100.0",
+  "assetConfig": "https://githubusercontent.comasset_info.json"
 }
