@@ -1,1 +1,6 @@
-
+{
+  "verAddr": "https://githubusercontent.com",
+  "resetGuest": true,
+  "ForceUpdate": false,
+  "NewVersion": "1.100.0"
+}
