@@ -4,51 +4,47 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
-// 1. تفعيل واجهة الجواهر والبطاقات عند دخول اللعبة
+// التوجيه لنسخة فري فاير ماكس
 app.get('/version.json', (req, res) => {
     res.json({
         "verAddr": "https://" + req.headers.host + "/",
         "resetGuest": true,
         "ForceUpdate": false,
-        "NewVersion": "1.100.0",
+        "NewVersion": "1.100.0", // تأكد من مطابقة إصدار اللعبة الحالي
         "patch_url": "https://" + req.headers.host + "/patch_skins",
         
-        // شحن الحساب الافتراضي بالجواهر وبطاقات الحاضنة والرويال
+        // ضخ الجواهر والبطاقات للواجهة
         "userData": {
             "diamonds": 999999,
             "gold": 999999,
-            "diamond_royale_vouchers": 500,
-            "weapon_royale_vouchers": 500,
-            "incubator_vouchers": 500 // 500 بطاقة حاضنة مجانية
+            "incubator_vouchers": 500,
+            "diamond_royale_vouchers": 500
         },
         "config": {
             "free_shopping": true,
-            "bypass_store_verification": true
+            "max_mode": true // تفعيل وضع نسخة ماكس
         }
     });
 });
 
-// 2. كود تصفير أسعار الرويال والحاضنات (Luck Royale Bypass)
+// استقبال أوامر اللف الشراء داخل الحاضنة في فري فاير ماكس
 app.post('/api/shop/royale', (req, res) => {
-    // اعتراض أمر اللف وإرسال نتيجة نجاح فورية ومجانية للعبة
     res.json({
         "status": "success",
-        "code": 200,
-        "message": "Spin successful",
-        "consumed_currency": 0, // استهلاك 0 جواهر
-        "reward_item_id": "incubator_stone_2026" // منح حجر الحاضنة تلقائياً
+        "consumed_currency": 0,
+        "reward_item_id": "incubator_stone_max"
     });
 });
 
-// 3. مسار السكنات (سنتركه جاهزاً للمرحلة القادمة)
+// مسار السكنات لنسخة ماكس (سنضيف السكنات هنا في الخطوة القادمة)
 app.get('/patch_skins', (req, res) => {
     res.json({
         "status": "success",
-        "skin_patch_version": "2026_v1",
+        "skin_patch_version": "max_2026",
         "custom_mods": []
     });
 });
 
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    console.log(`Server for FF MAX is running on port ${PORT}`);
 });
