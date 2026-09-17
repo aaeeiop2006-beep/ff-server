@@ -1,0 +1,13 @@
+{
+  "patch_version": "1.100.1",
+  "enable_mod": true,
+  "unlock_all_skins": true,
+  "unlock_all_emotes": true,
+  "custom_assets": [
+    {
+      "original_id": "101001", 
+      "replaced_id": "101009",
+      "comment": "تغيير السكن العادي إلى السكن النادر المختار"
+    }
+  ]
+}
