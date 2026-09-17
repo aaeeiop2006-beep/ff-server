@@ -4,30 +4,28 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
-// التوجيه لنسخة فري فاير ماكس
 app.get('/version.json', (req, res) => {
     res.json({
         "verAddr": "https://" + req.headers.host + "/",
         "resetGuest": true,
         "ForceUpdate": false,
-        "NewVersion": "1.100.0", // تأكد من مطابقة إصدار اللعبة الحالي
+        "NewVersion": "1.100.0",
         "patch_url": "https://" + req.headers.host + "/patch_skins",
         
-        // ضخ الجواهر والبطاقات للواجهة
+        // شحن الجواهر وبطاقات الحاضنة للماكس
         "userData": {
             "diamonds": 999999,
             "gold": 999999,
-            "incubator_vouchers": 500,
-            "diamond_royale_vouchers": 500
+            "incubator_vouchers": 500
         },
         "config": {
             "free_shopping": true,
-            "max_mode": true // تفعيل وضع نسخة ماكس
+            "max_mode": true
         }
     });
 });
 
-// استقبال أوامر اللف الشراء داخل الحاضنة في فري فاير ماكس
+// تفعيل لفات الحاضنة مجاناً
 app.post('/api/shop/royale', (req, res) => {
     res.json({
         "status": "success",
@@ -36,15 +34,22 @@ app.post('/api/shop/royale', (req, res) => {
     });
 });
 
-// مسار السكنات لنسخة ماكس (سنضيف السكنات هنا في الخطوة القادمة)
+// تفعيل سكن الهيب هوب تلقائياً من السيرفر
 app.get('/patch_skins', (req, res) => {
     res.json({
         "status": "success",
-        "skin_patch_version": "max_2026",
-        "custom_mods": []
+        "skin_patch_version": "max_2026_v1",
+        "custom_mods": [
+            {
+                "item_type": "cloth",
+                "original_id": "101001", // السكن الافتراضي
+                "replaced_id": "101009", // سكن الهيب هوب
+                "asset_source": "https://" + req.headers.host + "/files/hiphop_bundle.unity3d"
+            }
+        ]
     });
 });
 
 app.listen(PORT, () => {
-    console.log(`Server for FF MAX is running on port ${PORT}`);
+    console.log(`FF MAX Server Is Fully Active on port ${PORT}`);
 });
